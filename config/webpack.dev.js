@@ -28,40 +28,42 @@ module.exports = {
     module: {
         rules: [{
             test: /\.js$/,
-            use: [{
-                loader: "babel-loader"
-            }],
+            use: [
+                { loader: "babel-loader" }
+            ],
             exclude: /node_modules/
         },{
             test: /\.css$/,
-            use: [{
-                loader: "style-loader"
-            }, {
-                loader: "css-loader"
-            }]
-        }, {
+            use: [
+                { loader: "style-loader" },
+                { loader: "css-loader" }
+            ]
+        },{
+            test: /\.sass$/,
+            use: [
+                { loader: "style-loader" },
+                { loader: "css-loader" },
+                { loader: "sass-loader" }
+            ]
+        },{
+            test: /\.less$/,
+            use: [
+                { loader: "style-loader" },
+                { loader: "css-loader" },
+                { loader: "less-loader" }
+            ]
+        },{
             test: /\.html$/,
-            use: [{
-                loader: "file-loader",
-                options: {
-                    name: "[name].html"
-                }
-            }, {
-                loader: "extract-loader"
-            }, {
-                loader: "html-loader",
-                options: {
-                    attrs: ["img:src"]
-                }
-            }]
-        }, {
+            use: [
+                { loader: "file-loader", options: { name: "[name].html" } },
+                { loader: "extract-loader" },
+                { loader: "html-loader", options: { attrs: ["img:src"] } }
+            ]
+        },{
             test: /\.(jpg|jpeg|png)$/,
-            use: {
-                loader: "file-loader",
-                options: {
-                    name: "images/[name].[ext]",
-                }
-            }
+            use: [
+                { loader: "file-loader", options: { name: "images/[name].[ext]", } }
+            ]
         }]
     },
 
