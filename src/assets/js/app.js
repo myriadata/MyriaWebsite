@@ -1,6 +1,7 @@
 import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 require("babel-runtime/regenerator");
-require("../css/main.css");
+require("../style/main.css");
+require("../style/custom.scss");
 require("../../index.html");

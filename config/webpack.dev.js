@@ -40,7 +40,7 @@ module.exports = {
                 { loader: "postcss-loader" }
             ]
         },{
-            test: /\.sass$/,
+            test: /\.(sass|scss)$/,
             use: [
                 { loader: "style-loader" },
                 { loader: "css-loader" },
