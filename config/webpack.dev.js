@@ -65,7 +65,14 @@ module.exports = {
         },{
             test: /\.(jpg|jpeg|png)$/,
             use: [
-                { loader: "file-loader", options: { name: "images/[name].[ext]", } }
+                { loader: "file-loader", options: {
+                    outputPath: (url, resourcePath) => {
+                        var tabPath = resourcePath.split('/');
+                        var assetsIndex = tabPath.indexOf('assets');
+                        var outputPathTab = tabPath.slice(assetsIndex + 1, tabPath.length);
+                        return outputPathTab.join('/');
+                    }}
+                }
             ]
         }]
     },
