@@ -1,6 +1,7 @@
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 module.exports = {
@@ -23,6 +24,7 @@ module.exports = {
             verbose: true,
             dry: false
         }),
+        new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
             template: "./src/index.html"
         })
@@ -38,14 +40,14 @@ module.exports = {
         },{
             test: /\.css$/,
             use: [
-                { loader: "style-loader" },
+                { loader: MiniCssExtractPlugin.loader },
                 { loader: "css-loader" },
                 { loader: "postcss-loader" }
             ]
         },{
             test: /\.(sass|scss)$/,
             use: [
-                { loader: "style-loader" },
+                { loader: MiniCssExtractPlugin.loader },
                 { loader: "css-loader" },
                 { loader: "postcss-loader" },
                 { loader: "sass-loader" }
@@ -53,7 +55,7 @@ module.exports = {
         },{
             test: /\.less$/,
             use: [
-                { loader: "style-loader" },
+                { loader: MiniCssExtractPlugin.loader },
                 { loader: "css-loader" },
                 { loader: "postcss-loader" },
                 { loader: "less-loader" }
