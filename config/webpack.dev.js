@@ -1,5 +1,6 @@
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 
 module.exports = {
@@ -12,18 +13,20 @@ module.exports = {
         ]
     },
     output: {
-        filename: "[name]-bundle.js",
+        filename: "[name].js",
         path: path.resolve(__dirname, "../dist")
     },
 
-    plugins: [new CleanWebpackPlugin(
-        [ "dist" ],
-        {
+    plugins: [
+        new CleanWebpackPlugin([ "dist" ], {
             root: path.resolve(__dirname, ".."),
             verbose: true,
             dry: false
-        }
-    )],
+        }),
+        new HtmlWebpackPlugin({
+            template: "./src/index.html"
+        })
+    ],
 
     module: {
         rules: [{
@@ -58,8 +61,6 @@ module.exports = {
         },{
             test: /\.html$/,
             use: [
-                { loader: "file-loader", options: { name: "[name].html" } },
-                { loader: "extract-loader" },
                 { loader: "html-loader", options: { attrs: ["img:src"] } }
             ]
         },{
