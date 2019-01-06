@@ -10,6 +10,7 @@ module.exports = {
     entry: {
         app: [
             "babel-polyfill",
+            "babel-runtime/regenerator",
             "./src/assets/js/app.js"
         ]
     },
