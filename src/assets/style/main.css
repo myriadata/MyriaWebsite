@@ -23,7 +23,7 @@ a:hover {
 
 /* BODY */
 
-body > main > div > div.container.py-5 > div.row > div.col-md > p {
+body > main > div > div.container.py-5 > div.row > div.col > p {
     text-align: justify;
     text-justify: inter-word;
 }
