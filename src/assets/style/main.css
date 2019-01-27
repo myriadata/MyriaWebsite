@@ -1,0 +1,46 @@
+/* COMMON */
+
+a {
+    color: #49b270;
+}
+
+a:hover {
+    color: #49b270;
+}
+
+/* JUMBOTRON */
+
+.jumbotron {
+    background-image: url("../images/photo/office-jumbotron.png");
+    background-size: cover;
+    height: 250px;
+}
+
+.jumbotron > div > p {
+    color: #ececec;
+    text-shadow : 2px 2px #000;
+}
+
+/* BODY */
+
+body > main > div > div.container.py-5 > div.row > div.col > p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+/* FOOTER */
+
+div#footer {
+    background-color: #222;
+    color: #666;
+}
+
+div#footer>div>div {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+div#footer>div>div>p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
