@@ -10,10 +10,10 @@ jobs:
       - run: npm install
       - run: npm rebuild node-sass # Bug fix
       - run: npm run build:prod
-       - save_cache:
-         key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-         paths:
-           - dist
+      - save_cache:
+          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - dist
   deploy:
     docker:
       - image: circleci/node:10.15.0
