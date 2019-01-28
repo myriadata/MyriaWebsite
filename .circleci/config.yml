@@ -22,7 +22,7 @@ jobs:
     steps:
       - restore_cache:
           key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-      - run: npm install ftp-deploy
+      - run: npm install sftp-sync-deploy
       - run: node .circleci/deploy.js
 workflows:
   version: 2
