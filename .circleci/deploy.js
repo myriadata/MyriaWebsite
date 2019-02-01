@@ -11,7 +11,7 @@ let config = {
 
 let options = {
     dryRun: false,                       // Enable dry-run mode. Default to false
-    exclude: ['.htaccess'],              // exclude patterns (glob)
+    exclude: ['.htaccess'],              // htaccess is not automatically updated
     excludeMode: 'ignore',               // Behavior for excluded files ('remove' or 'ignore'), Default to 'remove'.
     forceUpload: false                   // Force uploading all files, Default to false(upload only newer files).
 };
