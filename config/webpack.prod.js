@@ -3,7 +3,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
     mode: "production",
@@ -34,6 +34,9 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: "./src/index.html"
+        }),
+        new CompressionPlugin({
+          algorithm: 'gzip'
         })
     ],
 

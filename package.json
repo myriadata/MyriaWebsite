@@ -1,6 +1,6 @@
 {
   "name": "myriawebsite",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MyriaData Website",
   "author": "MyriaData",
   "dependencies": {
@@ -23,6 +23,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "clean-webpack-plugin": "^1.0.0",
+    "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^2.1.0",
     "extract-loader": "^3.1.0",
     "file-loader": "^3.0.1",

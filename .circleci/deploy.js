@@ -5,17 +5,14 @@ let config = {
     port: 22,                            // Optional, Default to 22.
     username: process.env.FTPUSERNAME,   // Required.
     password: process.env.FTPPASS,       // Optional.
-    // privateKey: '/path/to/key.pem',   // Optional.
-    // passphrase: 'passphrase',         // Optional.
-    // agent: '/path/to/agent.sock',     // Optional, path to the ssh-agent socket.
     localDir: 'dist',                    // Required, Absolute or relative to cwd.
     remoteDir: '/'                       // Required, Absolute path only.
 };
 
 let options = {
     dryRun: false,                       // Enable dry-run mode. Default to false
-    exclude: [],                         // exclude patterns (glob)
-    excludeMode: 'remove',               // Behavior for excluded files ('remove' or 'ignore'), Default to 'remove'.
+    exclude: ['.htaccess'],              // htaccess is not automatically updated
+    excludeMode: 'ignore',               // Behavior for excluded files ('remove' or 'ignore'), Default to 'remove'.
     forceUpload: false                   // Force uploading all files, Default to false(upload only newer files).
 };
 

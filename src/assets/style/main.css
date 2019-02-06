@@ -16,14 +16,15 @@ a:hover {
     height: 250px;
 }
 
-.jumbotron > div > p {
-    color: #ececec;
-    text-shadow : 2px 2px #000;
+.jumbotron-small {
+    background-image: url("../images/photo/office-jumbotron-small.png");
+    background-size: cover;
+    height: 250px;
 }
 
 /* BODY */
 
-body > main > div > div.container.py-5 > div.row > div.col > p {
+body > main > div > div.container.py-5 > div.row > div.col-md > p {
     text-align: justify;
     text-justify: inter-word;
 }
