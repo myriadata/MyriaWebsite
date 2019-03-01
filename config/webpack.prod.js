@@ -16,7 +16,7 @@ module.exports = {
         ]
     },
     output: {
-        filename: "[name].js",
+        filename: "[name]-[contenthash].js",
         path: path.resolve(__dirname, "../dist")
     },
 
@@ -26,7 +26,9 @@ module.exports = {
             verbose: true,
             dry: false
         }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "[name]-[contenthash].css"
+        }),
         new OptimizeCssAssetsPlugin({
             cssProcessor: require('cssnano'),
             cssProcessorPluginOptions: {
@@ -80,13 +82,9 @@ module.exports = {
             test: /\.(jpg|jpeg|png)$/,
             use: [
                 { loader: "file-loader", options: {
-                    outputPath: (url, resourcePath) => {
-                        var tabPath = resourcePath.split('/');
-                        var assetsIndex = tabPath.indexOf('assets');
-                        var outputPathTab = tabPath.slice(assetsIndex + 1, tabPath.length);
-                        return outputPathTab.join('/');
-                    }}
-                }
+                    name: '[path][name]-[hash].[ext]',
+                    context: 'src/assets'
+                }}
             ]
         }]
     }
