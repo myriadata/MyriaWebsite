@@ -1,4 +1,4 @@
 {
-  "presets": [[ "env", { "debug": false } ]],
-  "plugins": ["transform-runtime"]
+  "presets": [[ "@babel/preset-env", { "debug": false } ]],
+  "plugins": ["@babel/transform-runtime"]
 }

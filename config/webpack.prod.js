@@ -11,7 +11,7 @@ module.exports = {
 
     entry: {
         app: [
-            "babel-polyfill",
+            "@babel/polyfill",
             "./src/assets/js/app.js",
             "./src/assets/js/analytics"
         ]

@@ -9,8 +9,8 @@ module.exports = {
 
     entry: {
         app: [
-            "babel-polyfill",
-            "babel-runtime/regenerator",
+            "@babel/polyfill",
+            "@babel/runtime/regenerator",
             "./src/assets/js/app.js"
         ]
     },
@@ -41,9 +41,12 @@ module.exports = {
     module: {
         rules: [{
             test: /\.js$/,
-            use: [
-                { loader: "babel-loader" }
-            ],
+            use: [{
+                loader: "babel-loader",
+                options: {
+                    presets: ['@babel/preset-env']
+                }
+            }],
             exclude: /node_modules/
         },{
             test: /\.css$/,
