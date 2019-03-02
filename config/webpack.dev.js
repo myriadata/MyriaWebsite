@@ -2,7 +2,7 @@ const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: "development",
@@ -28,7 +28,14 @@ module.exports = {
         new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
             template: "./src/index.html"
-        })
+        }),
+        new CopyPlugin([
+            // Need to copy this file to prevent from hash adding to filename
+            // /!\ No hashes exists in development mode but i prefer have same configuration if possible for both mode
+            // development and production
+            { from: 'src/assets/images/myriadata/logo_carre_transparence_web.png',
+                to: 'images/myriadata/logo_carre_transparence_web.png' }
+        ])
     ],
 
     module: {
