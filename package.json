@@ -4,6 +4,7 @@
   "description": "MyriaData Website",
   "author": "MyriaData",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.2",
     "bootstrap": "4.1.3"
   },
   "scripts": {

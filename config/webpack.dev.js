@@ -77,14 +77,19 @@ module.exports = {
             test: /\.(jpg|jpeg|png)$/,
             use: [
                 { loader: "file-loader", options: {
-                    outputPath: (url, resourcePath) => {
-                        var tabPath = resourcePath.split('/');
-                        var assetsIndex = tabPath.indexOf('assets');
-                        var outputPathTab = tabPath.slice(assetsIndex + 1, tabPath.length);
-                        return outputPathTab.join('/');
-                    }}
-                }
+                    name: '[path][name].[ext]',
+                    context: 'src/assets'
+                }}
             ]
+        },{
+            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+            use: [{
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'fonts/'
+                }
+            }]
         }]
     },
 
