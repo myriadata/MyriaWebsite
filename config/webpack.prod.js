@@ -4,18 +4,20 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: "production",
 
     entry: {
         app: [
-            "babel-polyfill",
-            "./src/assets/js/app.js"
+            "@babel/polyfill",
+            "./src/assets/js/app.js",
+            "./src/assets/js/analytics"
         ]
     },
     output: {
-        filename: "[name].js",
+        filename: "[name]-[contenthash].js",
         path: path.resolve(__dirname, "../dist")
     },
 
@@ -25,7 +27,9 @@ module.exports = {
             verbose: true,
             dry: false
         }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "[name]-[contenthash].css"
+        }),
         new OptimizeCssAssetsPlugin({
             cssProcessor: require('cssnano'),
             cssProcessorPluginOptions: {
@@ -33,11 +37,24 @@ module.exports = {
             }
         }),
         new HtmlWebpackPlugin({
-            template: "./src/index.html"
+            template: "./src/index.html",
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeRedundantAttributes: true,
+                removeScriptTypeAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                useShortDoctype: true
+            }
         }),
         new CompressionPlugin({
           algorithm: 'gzip'
-        })
+        }),
+        new CopyPlugin([
+            // Need to copy this file to prevent from hash adding to filename
+            { from: 'src/assets/images/myriadata/logo_carre_transparence_web.png',
+                to: 'images/myriadata/logo_carre_transparence_web.png' }
+        ])
     ],
 
     module: {
@@ -79,14 +96,19 @@ module.exports = {
             test: /\.(jpg|jpeg|png)$/,
             use: [
                 { loader: "file-loader", options: {
-                    outputPath: (url, resourcePath) => {
-                        var tabPath = resourcePath.split('/');
-                        var assetsIndex = tabPath.indexOf('assets');
-                        var outputPathTab = tabPath.slice(assetsIndex + 1, tabPath.length);
-                        return outputPathTab.join('/');
-                    }}
-                }
+                    name: '[path][name]-[hash].[ext]',
+                    context: 'src/assets'
+                }}
             ]
+        },{
+            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+            use: [{
+                loader: 'file-loader',
+                options: {
+                    name: '[name]-[hash].[ext]',
+                    outputPath: 'fonts/'
+                }
+            }]
         }]
     }
 };
