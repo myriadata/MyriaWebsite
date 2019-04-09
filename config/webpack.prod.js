@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
+const BrotliCompressionPlugin = require("brotli-webpack-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -50,6 +51,7 @@ module.exports = {
         new CompressionPlugin({
           algorithm: 'gzip'
         }),
+        new BrotliCompressionPlugin(),
         new CopyPlugin([
             // Need to copy this file to prevent from hash adding to filename
             { from: 'src/assets/images/myriadata/logo_carre_transparence_web.png',
