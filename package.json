@@ -1,47 +1,48 @@
 {
   "name": "myriawebsite",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "MyriaData Website",
   "author": "MyriaData",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.11.2",
-    "bootstrap": "^4.3.1"
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "bootstrap": "^4.4.1"
   },
   "scripts": {
     "build:dev": "webpack --config=config/webpack.dev.js",
     "build:package": "webpack --config=config/webpack.prod.js",
-    "start": "webpack-dev-server --config=config/webpack.dev.js"
+    "start": "webpack-dev-server --config=config/webpack.dev.js",
+    "start:package": "webpack-dev-server --config=config/webpack.prod.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/plugin-transform-runtime": "^7.6.2",
-    "@babel/polyfill": "^7.6.0",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/runtime": "^7.6.3",
-    "autoprefixer": "^9.7.1",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/runtime": "^7.7.7",
+    "autoprefixer": "^9.7.3",
     "babel-loader": "^8.0.6",
     "brotli-webpack-plugin": "^1.1.0",
     "clean-webpack-plugin": "^3.0.0",
-    "compression-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^5.0.4",
-    "css-loader": "^3.2.0",
+    "compression-webpack-plugin": "^3.0.1",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.4.0",
     "extract-loader": "^3.1.0",
-    "file-loader": "^4.2.0",
+    "file-loader": "^5.0.2",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "jquery": "^3.4.1",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
-    "mini-css-extract-plugin": "^0.8.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "popper.js": "^1.16.0",
-    "postcss": "^7.0.21",
+    "postcss": "^7.0.26",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^8.0.0",
-    "style-loader": "^1.0.0",
-    "webpack": "^4.41.2",
+    "style-loader": "^1.1.2",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.10.1"
   }
 }

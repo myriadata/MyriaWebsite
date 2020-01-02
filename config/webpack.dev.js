@@ -73,14 +73,15 @@ module.exports = {
         },{
             test: /\.html$/,
             use: [
-                { loader: "html-loader", options: { attrs: ["img:src"] } }
+                { loader: "html-loader", options: { attrs: ["img:src", "link:href"] } }
             ]
         },{
             test: /\.(jpg|jpeg|png)$/,
             use: [
                 { loader: "file-loader", options: {
                     name: '[path][name].[ext]',
-                    context: 'src/assets'
+                    context: 'src/assets',
+                    esModule: false
                 }}
             ]
         },{
