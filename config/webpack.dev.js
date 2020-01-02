@@ -80,7 +80,8 @@ module.exports = {
             use: [
                 { loader: "file-loader", options: {
                     name: '[path][name].[ext]',
-                    context: 'src/assets'
+                    context: 'src/assets',
+                    esModule: false
                 }}
             ]
         },{
