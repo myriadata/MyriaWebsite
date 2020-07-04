@@ -15,6 +15,10 @@ npm update
 npm outdated
 ```
 
+Circleci/node docker image version must be upgraded too. 
+This docker image is used by CircleCI to compile the application. 
+Version is specified into .circleci/config.yml.
+
 ## Build
 Two build processes exists. Represented two files in config directory (dev and prod).
 Warn to update this two files if it is necessary to update build process.
@@ -27,5 +31,5 @@ npm run build:package
 
 ## Deploy
 Deployment is managed by CircleCI.
-You just have to merge branches to master branch to launch deployment on production ennvironment :) 
+You just have to merge branches to master branch to launch deployment on production environment :)
 
