@@ -28,13 +28,13 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/index.html"
         }),
-        new CopyPlugin([
+        new CopyPlugin({ patterns: [
             // Need to copy this file to prevent from hash adding to filename
             // /!\ No hashes exists in development mode but i prefer have same configuration if possible for both mode
             // development and production
             { from: "src/assets/images/myriadata/logo_carre_transparence_web.png",
                 to: "images/myriadata/logo_carre_transparence_web.png" }
-        ])
+        ]})
     ],
 
     module: {
@@ -73,7 +73,9 @@ module.exports = {
         },{
             test: /\.html$/,
             use: [
-                { loader: "html-loader", options: { attrs: ["img:src", "link:href"] } }
+                { loader: "html-loader", options: { attributes: { list: [
+                    { tag: 'img', attribute: 'src', type: 'src' },
+                    { tag: 'link', attribute: 'href', type: 'src' } ] } } }
             ]
         },{
             test: /\.(jpg|jpeg|png)$/,
