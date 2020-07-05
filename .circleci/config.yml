@@ -3,25 +3,27 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.15.0
-    working_directory: ~/project
+    working_directory: ~/workspace
     steps:
       - checkout
-      - run: sudo npm install -g npm@latest
-      - run: npm install
-      - run: npm rebuild node-sass # Bug fix
-      - run: npm run build:package
-      - save_cache:
-          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Install build environment
+          command: sudo npm install -g npm@latest && npm install && npm rebuild node-sass # Bug fix
+      - run:
+          name: Build project
+          command: npm run build:package
+      - persist_to_workspace:
+          root: ~/workspace
           paths:
             - dist
             - .circleci
   deploy:
     docker:
       - image: circleci/node:10.15.0
-    working_directory: ~/project
+    working_directory: ~/workspace
     steps:
-      - restore_cache:
-          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - attach_workspace:
+          at: ~/workspace
       - run: npm install sftp-sync-deploy
       - run: node .circleci/deploy.js
 workflows:
