@@ -27,7 +27,7 @@ jobs:
             - .circleci
   deploy:
     docker:
-      - image: circleci/node:14.5.0
+      - image: circleci/node:10.15.0
     working_directory: ~/workspace
     steps:
       - attach_workspace:
