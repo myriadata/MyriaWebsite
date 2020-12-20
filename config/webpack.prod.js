@@ -6,6 +6,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPartialsPlugin = require('html-webpack-partials-plugin');
 
 module.exports = {
     mode: "production",
@@ -13,8 +14,7 @@ module.exports = {
     entry: {
         app: [
             "@babel/polyfill",
-            "./src/assets/js/app.js",
-            "./src/assets/js/analytics"
+            "./src/assets/js/app.js"
         ]
     },
     output: {
@@ -30,6 +30,11 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: "[name]-[contenthash].css"
+        }),
+        new HtmlWebpackPartialsPlugin({
+            path: path.join(__dirname, '../src/partials/analytics.html'),
+            priority: 'high',
+            location: 'head'
         }),
         new HtmlWebpackPlugin({
             template: "./src/index.html",

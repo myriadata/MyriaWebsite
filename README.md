@@ -46,6 +46,7 @@ Must be one of the following :
 Scope is to provide the context. Actual contexts are :
 - **GLOBAL** : for anything about technical needs 
 - **WELCOME** : about landing page 
+- **ANALYTICS** : activity measurement
 
 ### Subject
 
