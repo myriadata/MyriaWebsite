@@ -110,9 +110,12 @@ module.exports = {
         },{
             test: /\.html$/,
             use: [
-                { loader: "html-loader", options: { attributes: { list: [
-                    { tag: 'img', attribute: 'src', type: 'src' },
-                    { tag: 'link', attribute: 'href', type: 'src' } ] } } }
+                { loader: "html-loader", options: {
+                    esModule: false,
+                    sources: {
+                        list: [
+                            { tag: 'img', attribute: 'src', type: 'src' },
+                            { tag: 'link', attribute: 'href', type: 'src' } ] } } }
             ]
         },{
             test: /\.(jpg|jpeg|png)$/,
@@ -120,7 +123,7 @@ module.exports = {
                 { loader: "file-loader", options: {
                     name: "[path][name]-[hash].[ext]",
                     context: "src/assets",
-                        esModule: false
+                    esModule: false
                 }}
             ]
         },{
