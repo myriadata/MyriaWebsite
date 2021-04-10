@@ -2,10 +2,11 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-const BrotliCompressionPlugin = require("brotli-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPartialsPlugin = require('html-webpack-partials-plugin');
 
 module.exports = {
     mode: "production",
@@ -13,13 +14,13 @@ module.exports = {
     entry: {
         app: [
             "@babel/polyfill",
-            "./src/assets/js/app.js",
-            "./src/assets/js/analytics"
+            "./src/assets/js/app.js"
         ]
     },
     output: {
         filename: "[name]-[contenthash].js",
-        path: path.resolve(__dirname, "../dist")
+        path: path.resolve(__dirname, "../dist"),
+        publicPath: ''
     },
 
     plugins: [
@@ -30,11 +31,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "[name]-[contenthash].css"
         }),
-        new OptimizeCssAssetsPlugin({
-            cssProcessor: require("cssnano"),
-            cssProcessorPluginOptions: {
-                preset: ["default", { discardComments: { removeAll: true } }],
-            }
+        new HtmlWebpackPartialsPlugin({
+            path: path.join(__dirname, '../src/partials/analytics.html'),
+            priority: 'high',
+            location: 'head'
         }),
         new HtmlWebpackPlugin({
             template: "./src/index.html",
@@ -48,15 +48,34 @@ module.exports = {
             }
         }),
         new CompressionPlugin({
-          algorithm: "gzip"
+            filename: "[path][base].gz",
+            algorithm: "gzip"
         }),
-        new BrotliCompressionPlugin(),
+        new CompressionPlugin({
+            filename: "[path][base].br",
+            algorithm: "brotliCompress"
+        }),
         new CopyPlugin({ patterns: [
             // Need to copy this file to prevent from hash adding to filename
             { from: "src/assets/images/myriadata/logo_carre_transparence_web.png",
                 to: "images/myriadata/logo_carre_transparence_web.png" }
         ]})
     ],
+
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new TerserPlugin(),
+            new CssMinimizerPlugin({
+                minimizerOptions : {
+                    preset: [
+                        'default',
+                        { discardComments: { removeAll: true } }
+                    ]
+                }
+            })
+        ]
+    },
 
     module: {
         rules: [{
@@ -91,9 +110,12 @@ module.exports = {
         },{
             test: /\.html$/,
             use: [
-                { loader: "html-loader", options: { attributes: { list: [
-                    { tag: 'img', attribute: 'src', type: 'src' },
-                    { tag: 'link', attribute: 'href', type: 'src' } ] } } }
+                { loader: "html-loader", options: {
+                    esModule: false,
+                    sources: {
+                        list: [
+                            { tag: 'img', attribute: 'src', type: 'src' },
+                            { tag: 'link', attribute: 'href', type: 'src' } ] } } }
             ]
         },{
             test: /\.(jpg|jpeg|png)$/,
@@ -101,7 +123,7 @@ module.exports = {
                 { loader: "file-loader", options: {
                     name: "[path][name]-[hash].[ext]",
                     context: "src/assets",
-                        esModule: false
+                    esModule: false
                 }}
             ]
         },{

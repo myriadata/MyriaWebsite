@@ -16,7 +16,8 @@ module.exports = {
     },
     output: {
         filename: "[name].js",
-        path: path.resolve(__dirname, "../dist")
+        path: path.resolve(__dirname, "../dist"),
+        publicPath: ''
     },
 
     plugins: [
@@ -73,9 +74,12 @@ module.exports = {
         },{
             test: /\.html$/,
             use: [
-                { loader: "html-loader", options: { attributes: { list: [
-                    { tag: 'img', attribute: 'src', type: 'src' },
-                    { tag: 'link', attribute: 'href', type: 'src' } ] } } }
+                { loader: "html-loader", options: {
+                    esModule: false,
+                    sources: {
+                        list: [
+                            { tag: 'img', attribute: 'src', type: 'src' },
+                            { tag: 'link', attribute: 'href', type: 'src' } ] } } }
             ]
         },{
             test: /\.(jpg|jpeg|png)$/,
@@ -98,9 +102,5 @@ module.exports = {
         }]
     },
 
-    devServer: {
-        contentBase: "dist",
-        overlay: true
-    },
     devtool: "source-map"
 };
